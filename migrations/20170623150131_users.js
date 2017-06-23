@@ -10,7 +10,8 @@ exports.up = function(knex, Promise) {
   })
 };
 
-// NOTE: do we want to change data type for password?
+// NOTE: change first and last max length?
+      // do we want to change data type for password?
       // do we want timestamps for each table? (probably)
 
 exports.down = function(knex, Promise) {
