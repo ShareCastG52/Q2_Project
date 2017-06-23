@@ -15,21 +15,3 @@ Github Issues will be used to identify and track various issues with specific fe
 
 ## Team rights
 All members will have the right to merge PR's after review process
-
-
-
-------------------------------------------- added
-
-
-What are the guidelines for making a PR? Here's a recommended flow:
-When you are ready to submit a PR, do an interactive rebase on your branch to clean up your commit history as needed
-Checkout master (or dev depending on your team's workflow) and pull down from upstream to make sure your local master (or dev) has the latest work
-Checkout your feature branch again and rebase it onto the now-up-to-date master (or dev)
-Push your feature branch up to origin
-Submit a PR from origin's feature branch into upstream's master (or dev)
-Will all team members have the right to merge PRs?
-What kinds of communications are required to indicate a PR is ready, or has been merged?
-Will there be a review process prior to accepting PRs?
-What are the requirements for writing and passing tests in order for a PR to be accepted?
-If working off of a dev branch, what is the plan for merging it into master?
-How should the repo's issues be utilized specifically
