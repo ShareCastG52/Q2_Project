@@ -1,3 +1,4 @@
+'use strict';
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('users', (table) => {
@@ -9,10 +10,6 @@ exports.up = function(knex, Promise) {
     table.timestamps(true, true);
   })
 };
-
-// NOTE: change first and last max length?
-      // do we want to change data type for password?
-      // do we want timestamps for each table? (probably)
 
 exports.down = function(knex, Promise) {
   return knex.schema.dropTable('users');
