@@ -19,7 +19,7 @@ suite('favorites', addDatabaseHooks(() => {
         .set('Content-Type', 'application/json')
         .send({
           email: 'm.m.hares@gmail.com', //change this to something real
-          password: 'youreawizard'
+          password: 'Meghan'
         })
         .end((err, res) => {
           if (err) {
@@ -139,4 +139,4 @@ suite('favorites', addDatabaseHooks(() => {
   //       .expect(401, 'Unauthorized', done);
   //   });
   // }));
-}))
+}));
