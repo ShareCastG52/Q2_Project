@@ -236,7 +236,7 @@ suite('migrations', addDatabaseHooks(() => {
           podcast_id: {
             type: 'integer',
             maxLength: null,
-            nullable: true,
+            nullable: false,
             defaultValue: null
           },
 
