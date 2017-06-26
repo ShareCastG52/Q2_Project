@@ -12,7 +12,6 @@ const bcrypt = require('bcrypt');  //NOTE might be for routes subFolder
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-// NOTE needs a port and i suggest we pick something other than 8000
 
 app.disable('x-powered-by');
 
@@ -34,12 +33,11 @@ app.use(cookieParser());
 
 const path = require('path');
 
-
 const favorites = require('./routes/favorites');
 const shared = require('./routes/shared');
 const users = require('./routes/users');
 
-app.use('/books', books);
+app.use('/shared', books);
 app.use('/favorites', favorites);
 app.use('/users', users);
 
@@ -63,9 +61,13 @@ app.use((err, _req, res, _next) => {
   res.sendStatus(500);
 });
 
+const port = process.env.PORT || 8001;
+
 app.listen(port, () => {
   if (app.get('env') !== 'test') {
     // eslint-disable-next-line no-console
     console.log('Listening on port', port);
   }
 });
+
+module.exports = app;
