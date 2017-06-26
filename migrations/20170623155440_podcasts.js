@@ -2,7 +2,7 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('podcasts', (table) => {
-    table.increments();
+    table.increments('id').primary();
     table.string('genre', 25).notNullable().defaultTo('');
     table.string('title', 150).notNullable().defaultTo('');
     table.timestamps(true, true);

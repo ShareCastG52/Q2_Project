@@ -12,6 +12,8 @@ const bcrypt = require('bcrypt');  //NOTE might be for routes subFolder
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+// NOTE needs a port and i suggest we pick something other than 8000
+
 app.disable('x-powered-by');
 
 switch (app.get('env')) {

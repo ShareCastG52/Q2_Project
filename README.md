@@ -9,3 +9,5 @@ Changing lives, one podcast at a time.
 
   In the body of the request a new user will need to supply:
   {firstName, lastName, email, password}
+
+<iframe style="border: none" src="//html5-player.libsyn.com/embed/episode/id/5475951/height/90/width/600/theme/custom/autonext/no/thumbnail/yes/autoplay/no/preload/no/no_addthis/no/direction/backward/render-playlist/no/custom-color/0a75bd/" height="90" width="600" scrolling="no"  allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
