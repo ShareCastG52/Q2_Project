@@ -25,11 +25,11 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
           if (validEntry.hashed_password) {
             authenticate (hash)
               .then((credentials) => {
-                {first_name, last_name, id} = credentials;
+                {email, id} = credentials;
                 const jwtPayload ={
                     iss: "ShareCast";
                     sub: {
-                      username: first_name + " " + last_name,
+                      email: email,
                       id: id
                     },
                     exp: math.floor(Date.now()/ 1000) + 60*60,
