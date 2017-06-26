@@ -2,7 +2,7 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('episodes', (table) => {
-    table.increments();
+    table.increments('id').primary();
     table.string('title', 150).notNullable().defaultTo('');
     table.text('description');
     table.string('url', 255).notNullable().defaultTo('');
