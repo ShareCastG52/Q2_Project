@@ -88,18 +88,102 @@ suite('migrations', addDatabaseHooks(() => {
             defaultValue: 'nextval(\'podcasts_id_seq\'::regclass)'
           },
 
-          genre: {
+          artist_id: {
+            type: 'integer',
+            maxLength: null,
+            nullable: false,
+            defaultValue: null
+          },
+
+          collection_id: {
+            type: 'integer',
+            maxLength: null,
+            nullable: false,
+            defaultValue: null
+          },
+
+          track_id: {
+            type: 'integer',
+            maxLength: null,
+            nullable: false,
+            defaultValue: null
+          },
+
+          artist_name: {
             type: 'character varying',
-            maxLength: 25,
+            maxLength: 255,
             nullable: false,
             defaultValue: '\'\'::character varying'
           },
 
-          title: {
+          collection_name: {
             type: 'character varying',
-            maxLength: 150,
+            maxLength: 255,
             nullable: false,
             defaultValue: '\'\'::character varying'
+          },
+
+          artist_view_url: {
+            type: 'character varying',
+            maxLength: 255,
+            nullable: false,
+            defaultValue: '\'\'::character varying'
+          },
+
+          collection_view_url: {
+            type: 'character varying',
+            maxLength: 255,
+            nullable: false,
+            defaultValue: '\'\'::character varying'
+          },
+
+          feed_url: {
+            type: 'character varying',
+            maxLength: 255,
+            nullable: false,
+            defaultValue: '\'\'::character varying'
+          },
+
+          track_view_url: {
+            type: 'character varying',
+            maxLength: 255,
+            nullable: false,
+            defaultValue: '\'\'::character varying'
+          },
+
+          artwork_url_60: {
+            type: 'character varying',
+            maxLength: 255,
+            nullable: true,
+            defaultValue: null
+          },
+
+          release_date: {
+            type: 'timestamp with time zone',
+            maxLength: null,
+            nullable: true,
+            defaultValue: null
+          },
+
+          artwork_url_600: {
+            type: 'character varying',
+            maxLength: 255,
+            nullable: true,
+            defaultValue: null
+          },
+
+          genre_ids: {
+            type: 'ARRAY',
+            maxLength: null,
+            nullable: true,
+            defaultValue: null
+          },
+
+          genres: {
+            type: 'ARRAY',
+            maxLength: null,
+            nullable: true,
+            defaultValue: null
           },
 
           created_at: {

@@ -2,7 +2,7 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('shared', (table) => {
-    table.increments();
+    table.increments('id').primary();
     table.text('description');
     table.text('comments');
     table.integer('user_id_from').notNullable().references('id').inTable('users').index();
