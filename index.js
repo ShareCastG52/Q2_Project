@@ -38,7 +38,9 @@ const shared = require('./routes/shared');
 const login = require('./routes/login');
 const register = require('./routes/register');
 
+
 // app.use('/shared', shared);
+
 app.use('/favorites', favorites);
 app.use('/login', login);
 
@@ -62,7 +64,8 @@ app.use((err, _req, res, _next) => {
   res.sendStatus(500);
 });
 
-const port = process.env.PORT || 8000;
+
+const port = process.env.PORT || 8001;
 
 app.listen(port, () => {
   if (app.get('env') !== 'test') {

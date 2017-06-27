@@ -5,7 +5,11 @@ const knex = require('../knex');
 const jwt = require('jsonwebtoken');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
+<<<<<<< HEAD
 const FavoritesRepository = require('../src/favorites-repository');
+=======
+const FavoritesRepository = require('./favorites-repository');
+>>>>>>> fce494d4c3d466c987173411f3c6b8b9c824b1f4
 const favoritesRepo = new FavoritesRepository();
 
 // eslint-disable-next-line new-cap

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use strict';
 
 const bcrypt = require('bcrypt');
@@ -35,6 +36,12 @@ router.post('/', verifyLoginDetails, (req, res, next) => {
 
 // test for already create user  ---> should bouce with "Our records indicate that this email is already registered to our system"
 // test for new user should include their name, regex /thanks for registering, status 200
+=======
+
+
+
+
+>>>>>>> fce494d4c3d466c987173411f3c6b8b9c824b1f4
 
 
 function verifyLoginDetails(req, res, next) {
