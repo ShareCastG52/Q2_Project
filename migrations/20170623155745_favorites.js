@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').index();
     table.integer('user_id_shared').references('id').inTable('users').index();
     table.integer('podcast_id').notNullable().references('id').inTable('podcasts').onDelete('CASCADE').index();
-    table.integer('episode_id').references('id').inTable('episodes').onDelete('CASCADE').index();
+    //table.integer('episode_id').references('id').inTable('episodes').onDelete('CASCADE').index();
     table.timestamps(true, true);
   })
 };

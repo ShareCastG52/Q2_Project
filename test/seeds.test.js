@@ -1,6 +1,6 @@
 'use strict';
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'development';
 
 const assert = require('chai').assert;
 const { suite, test } = require('mocha');
@@ -11,79 +11,31 @@ suite('seeds', addDatabaseHooks(() => {
   test('users rows', (done) => {
     knex('users').orderBy('id', 'ASC')
       .then((actual) => {
-        // const expected = [{
-        //   id: 1,
-        //   title: 'JavaScript, The Good Parts',
-        //   author: 'Douglas Crockford',
-        //   genre: 'JavaScript',
-        //   description: "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole—a subset you can use to create truly extensible and efficient code.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/284/javascript_the_good_parts.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 2,
-        //   title: 'Learning React Native',
-        //   author: 'Bonnie Eisenman',
-        //   genre: 'React',
-        //   description: "Get a practical introduction to React Native, the JavaScript framework for writing and deploying fully featured mobile apps that look and feel native. With this hands-on guide, you'll learn how to build applications that target iOS, Android, and other mobile platforms instead of browsers. You'll also discover how to access platform features such as the camera, user location, and local storage.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/287/learning_react_native.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 3,
-        //   title: 'Functional JavaScript',
-        //   author: 'Michael Fogus',
-        //   genre: 'JavaScript',
-        //   description: "How can you overcome JavaScript language oddities and unsafe features? With this book, you'll learn how to create code that's beautiful, safe, and simple to understand and test by using JavaScript's functional programming support. Author Michael Fogus shows you how to apply functional-style concepts with Underscore.js, a JavaScript library that facilitates functional programming techniques.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/297/functional_javascript.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 4,
-        //   title: 'React: Up & Running',
-        //   author: 'Stoyan Stefanov',
-        //   genre: 'React',
-        //   description: "Hit the ground running with React, the open-source technology from Facebook for building rich web applications fast. With this practical guide, Yahoo! web developer Stoyan Stefanov teaches you how to build components—React's basic building blocks—and organize them into maintainable, large-scale apps. If you're familiar with basic JavaScript syntax, you're ready to get started.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/294/react_up_and_running.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 5,
-        //   title: 'Learning JavaScript Design Patterns',
-        //   author: 'Addy Osmani',
-        //   genre: 'JavaScript',
-        //   description: "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-date with the latest best practices, this book is for you.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/295/javascript_design_patterns.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 6,
-        //   title: 'JavaScript with Promises',
-        //   author: 'Daniel Parker',
-        //   genre: 'JavaScript',
-        //   description: "Asynchronous JavaScript is everywhere, whether you're using Ajax, AngularJS, Node.js, or WebRTC. This practical guide shows intermediate to advanced JavaScript developers how Promises can help you manage asynchronous code effectively—including the inevitable flood of callbacks as your codebase grows. You'll learn the inner workings of Promises and ways to avoid difficulties and missteps when using them.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/296/javascript_with_promises.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 7,
-        //   title: 'AngularJS: Up and Running',
-        //   author: 'Shyam Seshadri',
-        //   genre: 'Angular',
-        //   description: "If you want to get started with AngularJS, either as a side project, an additional tool, or for your main work, this practical guide teaches you how to use this meta-framework step-by-step, from the basics to advanced concepts. By the end of the book, you'll understand how to develop a large, maintainable, and performant application with AngularJS.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920033486/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 8,
-        //   title: 'Web Development with Node and Express',
-        //   author: 'Ethan Brown',
-        //   genre: 'Node',
-        //   description: "Learn how to build dynamic web applications with Express, a key component of the Node/JavaScript development stack. In this hands-on guide, author Ethan Brown teaches you the fundamentals through the development of a fictional application that exposes a public website and a RESTful API. You'll also learn web architecture best practices to help you build single-page, multi-page, and hybrid web apps with Express.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920032977/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }];
+        const expected = [{
+          id: 1,
+          first_name: 'Grant',
+          last_name: 'Willison',
+          email: 'emailgdw@gmail.com',
+          hashed_password: '$2a$10$AdBWIytdZxElaGvlxGKb6e0NF5P1rv3sCyQyWHZIqYvV1JbqxHEdS',
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }, {
+          id: 2,
+          first_name: 'Meghan',
+          last_name: 'Prestemon',
+          email: 'm.m.hares@gmail.com',
+          hashed_password: '$2a$10$MHCRByQXcrufNuhLRuOAv.WdyAC5R5f/Qjz9xvilWN4OGm0qL4/Hm',
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }, {
+          id: 3,
+          first_name: 'Dummy',
+          last_name: 'user',
+          email: 'dummyUser@gmail.com',
+          hashed_password: '$2a$10$2.0gXjKB5FY5RHMNzuUVYO9xg.OcUuv5wbRTPjxYHZEbiUSIasDou',
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }];
 
         for (let i = 0; i < expected.length; i++) {
           assert.deepEqual(
@@ -103,79 +55,61 @@ suite('seeds', addDatabaseHooks(() => {
   test('podcasts rows', (done) => {
     knex('podcasts').orderBy('id', 'ASC')
       .then((actual) => {
-        // const expected = [{
-        //   id: 1,
-        //   title: 'JavaScript, The Good Parts',
-        //   author: 'Douglas Crockford',
-        //   genre: 'JavaScript',
-        //   description: "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole—a subset you can use to create truly extensible and efficient code.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/284/javascript_the_good_parts.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 2,
-        //   title: 'Learning React Native',
-        //   author: 'Bonnie Eisenman',
-        //   genre: 'React',
-        //   description: "Get a practical introduction to React Native, the JavaScript framework for writing and deploying fully featured mobile apps that look and feel native. With this hands-on guide, you'll learn how to build applications that target iOS, Android, and other mobile platforms instead of browsers. You'll also discover how to access platform features such as the camera, user location, and local storage.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/287/learning_react_native.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 3,
-        //   title: 'Functional JavaScript',
-        //   author: 'Michael Fogus',
-        //   genre: 'JavaScript',
-        //   description: "How can you overcome JavaScript language oddities and unsafe features? With this book, you'll learn how to create code that's beautiful, safe, and simple to understand and test by using JavaScript's functional programming support. Author Michael Fogus shows you how to apply functional-style concepts with Underscore.js, a JavaScript library that facilitates functional programming techniques.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/297/functional_javascript.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 4,
-        //   title: 'React: Up & Running',
-        //   author: 'Stoyan Stefanov',
-        //   genre: 'React',
-        //   description: "Hit the ground running with React, the open-source technology from Facebook for building rich web applications fast. With this practical guide, Yahoo! web developer Stoyan Stefanov teaches you how to build components—React's basic building blocks—and organize them into maintainable, large-scale apps. If you're familiar with basic JavaScript syntax, you're ready to get started.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/294/react_up_and_running.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 5,
-        //   title: 'Learning JavaScript Design Patterns',
-        //   author: 'Addy Osmani',
-        //   genre: 'JavaScript',
-        //   description: "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-date with the latest best practices, this book is for you.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/295/javascript_design_patterns.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 6,
-        //   title: 'JavaScript with Promises',
-        //   author: 'Daniel Parker',
-        //   genre: 'JavaScript',
-        //   description: "Asynchronous JavaScript is everywhere, whether you're using Ajax, AngularJS, Node.js, or WebRTC. This practical guide shows intermediate to advanced JavaScript developers how Promises can help you manage asynchronous code effectively—including the inevitable flood of callbacks as your codebase grows. You'll learn the inner workings of Promises and ways to avoid difficulties and missteps when using them.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/296/javascript_with_promises.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 7,
-        //   title: 'AngularJS: Up and Running',
-        //   author: 'Shyam Seshadri',
-        //   genre: 'Angular',
-        //   description: "If you want to get started with AngularJS, either as a side project, an additional tool, or for your main work, this practical guide teaches you how to use this meta-framework step-by-step, from the basics to advanced concepts. By the end of the book, you'll understand how to develop a large, maintainable, and performant application with AngularJS.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920033486/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 8,
-        //   title: 'Web Development with Node and Express',
-        //   author: 'Ethan Brown',
-        //   genre: 'Node',
-        //   description: "Learn how to build dynamic web applications with Express, a key component of the Node/JavaScript development stack. In this hands-on guide, author Ethan Brown teaches you the fundamentals through the development of a fictional application that exposes a public website and a RESTful API. You'll also learn web architecture best practices to help you build single-page, multi-page, and hybrid web apps with Express.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920032977/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }];
+        const expected = [{
+          id: 1,
+          artist_id: 1134742667,
+          collection_id: 948976028,
+          track_id: 948976028,
+          artist_name: "Stories Podcast / Wondery",
+          collection_name: "Stories Podcast - A Free Children's Story Podcast for Bedtime, Car Rides, and Kids of All Ages!",
+          artist_view_url: "https://itunes.apple.com/us/artist/wondery/id1134742667?mt=2&uo=4",
+          collection_view_url: "https://itunes.apple.com/us/podcast/stories-podcast-free-childrens-story-podcast-for-bedtime/id948976028?mt=2&uo=4",
+          feed_url: "http://rss.art19.com/stories-podcast",
+          track_view_url: "https://itunes.apple.com/us/podcast/stories-podcast-free-childrens-story-podcast-for-bedtime/id948976028?mt=2&uo=4",
+          artwork_url_60: "http://is1.mzstatic.com/image/thumb/Music62/v4/ce/22/03/ce220318-10da-b927-16fb-ab5479045e1b/source/60x60bb.jpg",
+          release_date: "2017-06-14T21:51:00Z",
+          artwork_url_600: "http://is1.mzstatic.com/image/thumb/Music62/v4/ce/22/03/ce220318-10da-b927-16fb-ab5479045e1b/source/600x600bb.jpg",
+          genre_ids: [
+            "1305",
+            "26",
+            "1301",
+            "1304"
+          ],
+          genres: [
+            "Kids & Family",
+            "Podcasts",
+            "Arts",
+            "Education"
+          ],
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }, {
+          id: 2,
+          artist_id: 135082710,
+          collection_id: 555384933,
+          track_id: 555384933,
+          artist_name: "Roadshow by CNET",
+          collection_name: "On Cars (HD)",
+          artist_view_url: "https://itunes.apple.com/us/artist/cnet-com/id135082710?mt=2&uo=4",
+          collection_view_url: "https://itunes.apple.com/us/podcast/on-cars-hd/id555384933?mt=2&uo=4",
+          feed_url: "http://feed.cnet.com/feed/podcast/cnet-on-cars/hd.xml",
+          track_view_url: "https://itunes.apple.com/us/podcast/on-cars-hd/id555384933?mt=2&uo=4",
+          artwork_url_60: "http://is1.mzstatic.com/image/thumb/Music111/v4/30/65/c2/3065c294-252c-bd78-36f4-31659eb2af15/source/60x60bb.jpg",
+          release_date: "2017-03-28T23:33:00Z",
+          artwork_url_600: "http://is1.mzstatic.com/image/thumb/Music111/v4/30/65/c2/3065c294-252c-bd78-36f4-31659eb2af15/source/600x600bb.jpg",
+          genre_ids: [
+            "1446",
+            "26",
+            "1318"
+          ],
+          genres: [
+            "Gadgets",
+            "Podcasts",
+            "Technology"
+          ],
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }];
 
         for (let i = 0; i < expected.length; i++) {
           assert.deepEqual(
@@ -192,174 +126,54 @@ suite('seeds', addDatabaseHooks(() => {
       });
   });
 
-  test('episodes rows', (done) => {
-    knex('episodes').orderBy('id', 'ASC')
-      .then((actual) => {
-        // const expected = [{
-        //   id: 1,
-        //   title: 'JavaScript, The Good Parts',
-        //   author: 'Douglas Crockford',
-        //   genre: 'JavaScript',
-        //   description: "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole—a subset you can use to create truly extensible and efficient code.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/284/javascript_the_good_parts.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 2,
-        //   title: 'Learning React Native',
-        //   author: 'Bonnie Eisenman',
-        //   genre: 'React',
-        //   description: "Get a practical introduction to React Native, the JavaScript framework for writing and deploying fully featured mobile apps that look and feel native. With this hands-on guide, you'll learn how to build applications that target iOS, Android, and other mobile platforms instead of browsers. You'll also discover how to access platform features such as the camera, user location, and local storage.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/287/learning_react_native.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 3,
-        //   title: 'Functional JavaScript',
-        //   author: 'Michael Fogus',
-        //   genre: 'JavaScript',
-        //   description: "How can you overcome JavaScript language oddities and unsafe features? With this book, you'll learn how to create code that's beautiful, safe, and simple to understand and test by using JavaScript's functional programming support. Author Michael Fogus shows you how to apply functional-style concepts with Underscore.js, a JavaScript library that facilitates functional programming techniques.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/297/functional_javascript.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 4,
-        //   title: 'React: Up & Running',
-        //   author: 'Stoyan Stefanov',
-        //   genre: 'React',
-        //   description: "Hit the ground running with React, the open-source technology from Facebook for building rich web applications fast. With this practical guide, Yahoo! web developer Stoyan Stefanov teaches you how to build components—React's basic building blocks—and organize them into maintainable, large-scale apps. If you're familiar with basic JavaScript syntax, you're ready to get started.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/294/react_up_and_running.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 5,
-        //   title: 'Learning JavaScript Design Patterns',
-        //   author: 'Addy Osmani',
-        //   genre: 'JavaScript',
-        //   description: "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-date with the latest best practices, this book is for you.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/295/javascript_design_patterns.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 6,
-        //   title: 'JavaScript with Promises',
-        //   author: 'Daniel Parker',
-        //   genre: 'JavaScript',
-        //   description: "Asynchronous JavaScript is everywhere, whether you're using Ajax, AngularJS, Node.js, or WebRTC. This practical guide shows intermediate to advanced JavaScript developers how Promises can help you manage asynchronous code effectively—including the inevitable flood of callbacks as your codebase grows. You'll learn the inner workings of Promises and ways to avoid difficulties and missteps when using them.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/296/javascript_with_promises.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 7,
-        //   title: 'AngularJS: Up and Running',
-        //   author: 'Shyam Seshadri',
-        //   genre: 'Angular',
-        //   description: "If you want to get started with AngularJS, either as a side project, an additional tool, or for your main work, this practical guide teaches you how to use this meta-framework step-by-step, from the basics to advanced concepts. By the end of the book, you'll understand how to develop a large, maintainable, and performant application with AngularJS.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920033486/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 8,
-        //   title: 'Web Development with Node and Express',
-        //   author: 'Ethan Brown',
-        //   genre: 'Node',
-        //   description: "Learn how to build dynamic web applications with Express, a key component of the Node/JavaScript development stack. In this hands-on guide, author Ethan Brown teaches you the fundamentals through the development of a fictional application that exposes a public website and a RESTful API. You'll also learn web architecture best practices to help you build single-page, multi-page, and hybrid web apps with Express.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920032977/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }];
-
-        for (let i = 0; i < expected.length; i++) {
-          assert.deepEqual(
-            actual[i],
-            expected[i],
-            `Row id=${i + 1} not the same`
-          );
-        }
-
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+  // test('episodes rows', (done) => {
+  //   knex('episodes').orderBy('id', 'ASC')
+  //     .then((actual) => {
+  //       // const expected = [  ];
+  //
+  //       for (let i = 0; i < expected.length; i++) {
+  //         assert.deepEqual(
+  //           actual[i],
+  //           expected[i],
+  //           `Row id=${i + 1} not the same`
+  //         );
+  //       }
+  //
+  //       done();
+  //     })
+  //     .catch((err) => {
+  //       done(err);
+  //     });
+  // });
 
   test('shared rows', (done) => {
     knex('shared').orderBy('id', 'ASC')
       .then((actual) => {
-        // const expected = [{
-        //   id: 1,
-        //   title: 'JavaScript, The Good Parts',
-        //   author: 'Douglas Crockford',
-        //   genre: 'JavaScript',
-        //   description: "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole—a subset you can use to create truly extensible and efficient code.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/284/javascript_the_good_parts.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 2,
-        //   title: 'Learning React Native',
-        //   author: 'Bonnie Eisenman',
-        //   genre: 'React',
-        //   description: "Get a practical introduction to React Native, the JavaScript framework for writing and deploying fully featured mobile apps that look and feel native. With this hands-on guide, you'll learn how to build applications that target iOS, Android, and other mobile platforms instead of browsers. You'll also discover how to access platform features such as the camera, user location, and local storage.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/287/learning_react_native.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 3,
-        //   title: 'Functional JavaScript',
-        //   author: 'Michael Fogus',
-        //   genre: 'JavaScript',
-        //   description: "How can you overcome JavaScript language oddities and unsafe features? With this book, you'll learn how to create code that's beautiful, safe, and simple to understand and test by using JavaScript's functional programming support. Author Michael Fogus shows you how to apply functional-style concepts with Underscore.js, a JavaScript library that facilitates functional programming techniques.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/297/functional_javascript.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 4,
-        //   title: 'React: Up & Running',
-        //   author: 'Stoyan Stefanov',
-        //   genre: 'React',
-        //   description: "Hit the ground running with React, the open-source technology from Facebook for building rich web applications fast. With this practical guide, Yahoo! web developer Stoyan Stefanov teaches you how to build components—React's basic building blocks—and organize them into maintainable, large-scale apps. If you're familiar with basic JavaScript syntax, you're ready to get started.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/294/react_up_and_running.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 5,
-        //   title: 'Learning JavaScript Design Patterns',
-        //   author: 'Addy Osmani',
-        //   genre: 'JavaScript',
-        //   description: "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-date with the latest best practices, this book is for you.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/295/javascript_design_patterns.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 6,
-        //   title: 'JavaScript with Promises',
-        //   author: 'Daniel Parker',
-        //   genre: 'JavaScript',
-        //   description: "Asynchronous JavaScript is everywhere, whether you're using Ajax, AngularJS, Node.js, or WebRTC. This practical guide shows intermediate to advanced JavaScript developers how Promises can help you manage asynchronous code effectively—including the inevitable flood of callbacks as your codebase grows. You'll learn the inner workings of Promises and ways to avoid difficulties and missteps when using them.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/296/javascript_with_promises.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 7,
-        //   title: 'AngularJS: Up and Running',
-        //   author: 'Shyam Seshadri',
-        //   genre: 'Angular',
-        //   description: "If you want to get started with AngularJS, either as a side project, an additional tool, or for your main work, this practical guide teaches you how to use this meta-framework step-by-step, from the basics to advanced concepts. By the end of the book, you'll understand how to develop a large, maintainable, and performant application with AngularJS.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920033486/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 8,
-        //   title: 'Web Development with Node and Express',
-        //   author: 'Ethan Brown',
-        //   genre: 'Node',
-        //   description: "Learn how to build dynamic web applications with Express, a key component of the Node/JavaScript development stack. In this hands-on guide, author Ethan Brown teaches you the fundamentals through the development of a fictional application that exposes a public website and a RESTful API. You'll also learn web architecture best practices to help you build single-page, multi-page, and hybrid web apps with Express.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920032977/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }];
+        const expected = [{
+          id: 1,
+          user_id_from: 1,
+          user_id_to: 2,
+          podcast_id:1,
+          comments: "hey I think you'd really like this podcast",
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        },{
+          id: 2,
+          user_id_from: 3,
+          user_id_to: 2,
+          podcast_id:2,
+          comments: "hey, i\'m the dummy, I think you'd really like this podcast",
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }, {
+          id: 3,
+          user_id_from: 3,
+          user_id_to: 1,
+          podcast_id:2,
+          comments: "hey i\'m a dummy, I think you'd really like this podcast",
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }];
 
         for (let i = 0; i < expected.length; i++) {
           assert.deepEqual(
@@ -379,79 +193,28 @@ suite('seeds', addDatabaseHooks(() => {
   test('favorites rows', (done) => {
     knex('favorites').orderBy('id', 'ASC')
       .then((actual) => {
-        // const expected = [{
-        //   id: 1,
-        //   title: 'JavaScript, The Good Parts',
-        //   author: 'Douglas Crockford',
-        //   genre: 'JavaScript',
-        //   description: "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole—a subset you can use to create truly extensible and efficient code.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/284/javascript_the_good_parts.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 2,
-        //   title: 'Learning React Native',
-        //   author: 'Bonnie Eisenman',
-        //   genre: 'React',
-        //   description: "Get a practical introduction to React Native, the JavaScript framework for writing and deploying fully featured mobile apps that look and feel native. With this hands-on guide, you'll learn how to build applications that target iOS, Android, and other mobile platforms instead of browsers. You'll also discover how to access platform features such as the camera, user location, and local storage.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/287/learning_react_native.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 3,
-        //   title: 'Functional JavaScript',
-        //   author: 'Michael Fogus',
-        //   genre: 'JavaScript',
-        //   description: "How can you overcome JavaScript language oddities and unsafe features? With this book, you'll learn how to create code that's beautiful, safe, and simple to understand and test by using JavaScript's functional programming support. Author Michael Fogus shows you how to apply functional-style concepts with Underscore.js, a JavaScript library that facilitates functional programming techniques.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/297/functional_javascript.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 4,
-        //   title: 'React: Up & Running',
-        //   author: 'Stoyan Stefanov',
-        //   genre: 'React',
-        //   description: "Hit the ground running with React, the open-source technology from Facebook for building rich web applications fast. With this practical guide, Yahoo! web developer Stoyan Stefanov teaches you how to build components—React's basic building blocks—and organize them into maintainable, large-scale apps. If you're familiar with basic JavaScript syntax, you're ready to get started.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/294/react_up_and_running.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 5,
-        //   title: 'Learning JavaScript Design Patterns',
-        //   author: 'Addy Osmani',
-        //   genre: 'JavaScript',
-        //   description: "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-date with the latest best practices, this book is for you.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/295/javascript_design_patterns.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 6,
-        //   title: 'JavaScript with Promises',
-        //   author: 'Daniel Parker',
-        //   genre: 'JavaScript',
-        //   description: "Asynchronous JavaScript is everywhere, whether you're using Ajax, AngularJS, Node.js, or WebRTC. This practical guide shows intermediate to advanced JavaScript developers how Promises can help you manage asynchronous code effectively—including the inevitable flood of callbacks as your codebase grows. You'll learn the inner workings of Promises and ways to avoid difficulties and missteps when using them.",
-        //   cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/296/javascript_with_promises.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 7,
-        //   title: 'AngularJS: Up and Running',
-        //   author: 'Shyam Seshadri',
-        //   genre: 'Angular',
-        //   description: "If you want to get started with AngularJS, either as a side project, an additional tool, or for your main work, this practical guide teaches you how to use this meta-framework step-by-step, from the basics to advanced concepts. By the end of the book, you'll understand how to develop a large, maintainable, and performant application with AngularJS.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920033486/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }, {
-        //   id: 8,
-        //   title: 'Web Development with Node and Express',
-        //   author: 'Ethan Brown',
-        //   genre: 'Node',
-        //   description: "Learn how to build dynamic web applications with Express, a key component of the Node/JavaScript development stack. In this hands-on guide, author Ethan Brown teaches you the fundamentals through the development of a fictional application that exposes a public website and a RESTful API. You'll also learn web architecture best practices to help you build single-page, multi-page, and hybrid web apps with Express.",
-        //   cover_url: 'http://akamaicovers.oreilly.com/images/0636920032977/lrg.jpg',
-        //   created_at: new Date('2016-06-26 14:26:16 UTC'),
-        //   updated_at: new Date('2016-06-26 14:26:16 UTC')
-        // }];
+        const expected = [{
+          id: 1,
+          user_id: 1,
+          user_id_shared: 2,
+          podcast_id: 1,
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }, {
+          id: 2,
+          user_id: 3,
+          user_id_shared: 2,
+          podcast_id: 2,
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }, {
+          id: 3,
+          user_id: 3,
+          user_id_shared: 1,
+          podcast_id: 2,
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        }];
 
         for (let i = 0; i < expected.length; i++) {
           assert.deepEqual(
