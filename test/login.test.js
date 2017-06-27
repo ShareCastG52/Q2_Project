@@ -1,14 +1,14 @@
 'use strict';
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'development';
 
 const { suite, test } = require('mocha');
 const request = require('supertest');
 const knex = require('../knex');
-const server = require('../server');
+const server = require('../index');
 const { addDatabaseHooks } = require('./utils')
 
-suite('login', addDatabaseHooks(() => {
+suite('login route', addDatabaseHooks(() => {
 
   test('POST /login with proper credentials', (done) => {
     request(server)

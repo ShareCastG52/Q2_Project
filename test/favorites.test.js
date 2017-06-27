@@ -6,7 +6,7 @@ const { suite, test } = require('mocha');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../index');
-const { addDatabaseHooks } = require('./utils')
+const { addDatabaseHooks } = require('./utils');
 
 suite('favorites', addDatabaseHooks(() => {
   suite('with token', addDatabaseHooks(() => {
@@ -162,5 +162,5 @@ suite('favorites', addDatabaseHooks(() => {
   //       .expect('Content-Type', /plain/)
   //       .expect(401, 'Unauthorized', done);
   //   });
-  }));
+  // }));
 }));
