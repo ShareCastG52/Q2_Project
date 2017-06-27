@@ -14,12 +14,18 @@ const jwt = require('jsonwebtoken');
 router.post('/' , verifyLoginDetails, (req, res, next) => {
 
 // Store hash in your password DB with storePasswords Fn
-
-      repo.authenticate (req.body.email)
+  let email, hashed_password, id;
+        repo.authenticate (req.body.email)
         .then((credentials) => {
-          const {email, hashed_password, id} = credentials;
-        });
-        bcrypt.compare(req.body.password, hashed_password)
+           {email, hashed_password, id} = credentials;
+
+          return email, hashed_password, id;
+        })
+        .then((input) => {
+            //inout is foo
+          return bcrypt.compare(req.body.password, hashed_password)
+
+        })
         .then((successfulLogin) => {
           if (!successfulLogin) {
             res.header('Content-Type', 'application/json');
