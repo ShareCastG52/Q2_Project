@@ -10,7 +10,7 @@ const { addDatabaseHooks } = require('./utils')
 
 suite('login', addDatabaseHooks(() => {
 
-  test('POST /login', (done) => {
+  test('POST /login with proper credentials', (done) => {
     request(server)
       .post('/login')
       .set('Accept', 'application/json')
@@ -26,8 +26,6 @@ suite('login', addDatabaseHooks(() => {
       })
       .expect(200, {
         id: 2,
-        firstName: 'Meghan',
-        lastName: 'Prestemon',
         email: 'm.m.hares@gmail.com'
       })
       .expect('Content-Type', /json/)
@@ -36,28 +34,52 @@ suite('login', addDatabaseHooks(() => {
 
   test('POST /login with bad email', (done) => {
     request(server)
-      .post('/token')
+      .post('/login')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
         email: 'bad.email@gmail.com',
         password: 'youreawizard'
       })
-      .expect('Content-Type', /plain/)
-      .expect(400, 'Bad email or password', done);
+      .expect('Content-Type', /json/)
+      .expect(400, 'Email or password don\'t match, try again', done);
   });
 
   test('POST /login with bad password', (done) => {
     request(server)
-      .post('/token')
+      .post('/login')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
         email: 'm.m.hares@gmail.com',
         password: 'badpassword'
       })
-      .expect('Content-Type', /plain/)
-      .expect(400, 'Bad email or password', done);
+      .expect('Content-Type', /json/)
+      .expect(400, 'Email or password don\'t match, try again', done);
+  });
+
+  test('POST /login with no email', (done) => {
+    request(server)
+      .post('/login')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        password: 'youreawizard'
+      })
+      .expect('Content-Type', /json/)
+      .expect(400, 'Email must not be blank', done);
+  });
+
+  test('POST /login with no password', (done) => {
+    request(server)
+      .post('/login')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        email: 'm.m.hares@gmail.com'
+      })
+      .expect('Content-Type', /json/)
+      .expect(400, 'Password must not be blank', done);
   });
 
   // test('DELETE /login', (done) => {

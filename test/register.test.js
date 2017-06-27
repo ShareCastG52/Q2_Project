@@ -28,12 +28,7 @@ suite('register', addDatabaseHooks(() => {
         delete res.body.createdAt;
         delete res.body.updatedAt;
       })
-      .expect(200, {
-        id: 4,
-        firstName: 'Carl',
-        lastName: 'Jung',
-        email: 'cgjung@gmail.com'
-      })
+      .expect(200, `Thanks for registering Carl! You are now able to log in to your account`)
       .expect('Content-Type', /json/)
       .end((httpErr, _res) => {
         if (httpErr) {
@@ -68,4 +63,63 @@ suite('register', addDatabaseHooks(() => {
           });
       });
   });
+
+    test('POST /register with no email', (done) => {
+    request(server)
+      .post('/register')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        firstName: 'Carl',
+        lastName: 'Jung',
+        password
+      })
+      .expect('Content-Type', /json/)
+      .expect(400, 'Email must not be blank', done);
+  });
+
+  test('POST /register with no password', (done) => {
+    request(server)
+      .post('/register')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        firstName: 'Carl',
+        lastName: 'Jung',
+        email: 'cgjung@gmail.com'
+      })
+      .expect('Content-Type', /json/)
+      .expect(400, 'Password must not be blank', done);
+  });
+
+  test('POST /register with existing email', (done) => {
+    /* eslint-disable no-sync */
+    knex('users')
+      .insert({
+        first_name: 'Carl',
+        last_name: 'Jung',
+        email: 'cgjung@gmail.com',
+        hashed_password: bcrypt.hashSync('psychology', 1)
+      })
+      .then(() => {
+        request(server)
+          .post('/register')
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/json')
+          .send({
+            firstName: 'Carl',
+            lastName: 'Jung',
+            email: 'cgjung@gmail.com',
+            password: 'psychology'
+          })
+          .expect('Content-Type', /plain/)
+          .expect(400, 'Our records indicate a user with this email already exists', done);
+      })
+      .catch((err) => {
+        done(err);
+      });
+
+  });
+
+  //test for no first or last name?
 }));
