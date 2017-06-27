@@ -40,7 +40,6 @@ const register = require('./routes/register');
 
 
 // app.use('/shared', shared);
-
 app.use('/favorites', favorites);
 app.use('/login', login);
 
