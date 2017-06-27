@@ -72,58 +72,6 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
     //this route is for new users only
 
 
-=======
-//posts a new user to DB
-router.post('/' , verifyLoginDetails, (req, res, next) => {
-
-  // Store hash in your password DB with storePasswords Fn
-
-            repo.authenticate (req.body.email)
-              .then((credentials) => {
-                {email, hashed_password, id} = credentials;
-                bcrypt.compare(req.body.password, hashed_password)
-                  .then((successfulLogin) => {
-                    if (!successfulLogin) {
-                      res.header('Content-Type', 'application/json');
-                      res.send('Email and password don\'t match');
-                      return;
-                    }
-
-                    // TODO pickup coding HERE NOTE
-                    const jwtPayload ={
-                      iss: "ShareCast",
-                      sub: {
-                        email: email,
-                        id: id
-                      },
-                      exp: math.floor(Date.now()/ 1000) + 60*60,
-                      loggedIn: true
-                    }
-                    const secret = process.env.TOKEN_SECRET;
-                    const token = jwt.sign(jwtPaylod, secret);
-                    res.cookie()
-                    res.status(200).send([id, email])
-
-
-                  })
-              })
-              .catch(err => res.status(500).send(err));
-          } else {
-            res.status()
-
-          }
-
-        })
-
-
-
-});
-
-    //this route is for new users only
-
-})
->>>>>>> fce494d4c3d466c987173411f3c6b8b9c824b1f4
-
 // function checkIfUserIsRegistered(req, res, next) {
 //
 // }
@@ -133,11 +81,7 @@ function verifyLoginDetails(req, res, next) {
     let email = req.body.email;
     let password = req.body.password;
 
-<<<<<<< HEAD
     if (email && password) {
-=======
-    if (firstName && lastName && email && password) {
->>>>>>> fce494d4c3d466c987173411f3c6b8b9c824b1f4
       next();
       return;
     }
