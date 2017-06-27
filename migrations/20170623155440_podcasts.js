@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
     table.string('feed_url', 255).notNullable().defaultTo('');
     table.string('track_view_url', 255).notNullable().defaultTo('');
     table.string('artwork_url_60', 255);
-    table.dateTime('release_date');
+    table.string('release_date', 50);
     table.string('artwork_url_600', 255);
     table.specificType('genre_ids', 'text[]');
     table.specificType('genres', 'text[]')

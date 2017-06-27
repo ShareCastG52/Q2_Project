@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
     .then(function (){
       return knex('podcasts').insert([
         {
-
+          "id": 1,
           "artist_id": 1134742667,
           "collection_id": 948976028,
           "track_id": 948976028,
@@ -31,10 +31,12 @@ exports.seed = function(knex, Promise) {
             "Podcasts",
             "Arts",
             "Education"
-          ]
+          ],
+          'created_at': new Date('2016-06-29 14:26:16 UTC'),
+          'updated_at': new Date('2016-06-29 14:26:16 UTC')
         },
         {
-
+          "id": 2,
           "artist_id": 135082710,
           "collection_id": 555384933,
           "track_id": 555384933,
@@ -56,8 +58,10 @@ exports.seed = function(knex, Promise) {
             "Gadgets",
             "Podcasts",
             "Technology"
-          ]
-        },
+          ],
+          'created_at': new Date('2016-06-29 14:26:16 UTC'),
+          'updated_at': new Date('2016-06-29 14:26:16 UTC')
+        }
       ]);
 
   })
