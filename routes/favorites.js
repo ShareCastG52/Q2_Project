@@ -5,7 +5,11 @@ const knex = require('../knex');
 const jwt = require('jsonwebtoken');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
+<<<<<<< HEAD
 const FavoritesRepository = require('../src/favorites-repository');
+=======
+const FavoritesRepository = require('./favorites-repository');
+>>>>>>> changes i'd like to lose in favor of meghans
 const favoritesRepo = new FavoritesRepository();
 
 // eslint-disable-next-line new-cap
