@@ -10,7 +10,6 @@ let repo = new Repo();
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
-<<<<<<< HEAD
 //verifies an established user to DB
 router.post('/' , verifyLoginDetails, (req, res, next) => {
 
