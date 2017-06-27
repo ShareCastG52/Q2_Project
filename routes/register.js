@@ -1,7 +1,40 @@
+'use strict';
 
+const bcrypt = require('bcrypt');
+const express = require('express');
+const Repo = require('../src/user-repository');
+const humps = require('humps');
+// eslint-disable-next-line new-cap
+const router = express.Router();
+let repo = new Repo();
+const saltRounds = 10;
+const jwt = require('jsonwebtoken');
 
+router.post('/', verifyLoginDetails, (req, res, next) => {
 
+  repo.checkIfUserIsRegistered(req.body.email)
+    .then(resolvedEntry => {
+      if (resolvedEntry.id) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send("Our records indicate that this email is already registered to our system")
+      }
+    bcrypt.hash(req.body.password, saltRounds)
+      .then((hash) => {
+        repo.register(req.body, hash)
+      })
+      .then((newEntry) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(`Thanks for registering ${newEntry.first_name}! You are now able to log in to your account`);
+      })
+    })
+    .catch(err => {
+      res.setHeader('Content-Type', 'application/json')
+      res.status(500).send(err)
+    });
+})
 
+// test for already create user  ---> should bouce with "Our records indicate that this email is already registered to our system"
+// test for new user should include their name, regex /thanks for registering, status 200
 
 
 function verifyLoginDetails(req, res, next) {
