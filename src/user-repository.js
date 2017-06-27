@@ -14,7 +14,7 @@ class UserRepository{
     // POST-5) get array of objects from knex - return id, db_hashed_pw
     return knex('users')
       .select('id', 'first_name', 'last_name', 'email', 'hashed_password')
-      .where({ email: email})
+      .where({email: email})
       .first();
   }
 
