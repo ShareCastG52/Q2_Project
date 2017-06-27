@@ -41,8 +41,8 @@ suite('login route', addDatabaseHooks(() => {
         email: 'bad.email@gmail.com',
         password: 'youreawizard'
       })
-      .expect('Content-Type', /json/)
-      .expect(400, 'Email or password don\'t match, try again', done);
+      .expect('Content-Type', /text/)
+      .expect(400, 'Email or password doesn\'t match, try again', done);
   });
 
   test('POST /login with bad password', (done) => {
@@ -54,8 +54,8 @@ suite('login route', addDatabaseHooks(() => {
         email: 'm.m.hares@gmail.com',
         password: 'badpassword'
       })
-      .expect('Content-Type', /json/)
-      .expect(400, 'Email or password don\'t match, try again', done);
+      .expect('Content-Type', /text/)
+      .expect(400, 'Email or password doesn\'t match, try again', done);
   });
 
   test('POST /login with no email', (done) => {
@@ -66,7 +66,7 @@ suite('login route', addDatabaseHooks(() => {
       .send({
         password: 'youreawizard'
       })
-      .expect('Content-Type', /json/)
+      .expect('Content-Type', /text/)
       .expect(400, 'Email must not be blank', done);
   });
 
@@ -78,7 +78,7 @@ suite('login route', addDatabaseHooks(() => {
       .send({
         email: 'm.m.hares@gmail.com'
       })
-      .expect('Content-Type', /json/)
+      .expect('Content-Type', /text/)
       .expect(400, 'Password must not be blank', done);
   });
 

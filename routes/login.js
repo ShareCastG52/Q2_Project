@@ -18,14 +18,15 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
 
       repo.authenticate (req.body.email)
         .then((credentials) => {
+          if (!credentials) {
+            throw new Error('ERROR_NO_MATCH');
+          }
           userCredentials = credentials;
           return bcrypt.compare(req.body.password, credentials.hashed_password)
         })
         .then((successfulLogin) => {
           if (!successfulLogin) {
-            res.setHeader('Content-Type', 'application/json');
-            res.status(400).send('Email or password don\'t match, try again');
-            return;
+            throw new Error('ERROR_NO_MATCH');
           }
 
           const jwtPayload ={
@@ -43,9 +44,12 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
           res.cookie('token', token, {httpOnly: true });
           // NOTE should send JSON back check in tests
           res.status(200).send(jwtPayload.sub);
-
         })
         .catch(err => {
+          if (err.message === 'ERROR_NO_MATCH') {
+            res.status(400).send('Email or password doesn\'t match, try again');
+            return;
+          }
           res.setHeader('Content-Type', 'application/json')
           res.status(500).send(err)
         });
@@ -77,16 +81,13 @@ function verifyLoginDetails(req, res, next) {
       return;
     }
     else if (!email) {
-      res.setHeader('Content-Type', 'application/json');
       res.status(400).send("Email must not be blank");
     }
     else if (!password) {
-      res.setHeader('Content-Type', 'application/json');
       res.status(400).send("Password must not be blank");
     }
     // NOTE do we even need this given the above else if's? and wouldn't this be handled by form validation?
     else {
-      res.setHeader('Content-Type', 'application/json');
       res.status(400).send("Incorrect credentials");
     }
 };
