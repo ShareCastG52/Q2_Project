@@ -10,26 +10,27 @@ exports.seed = function(knex, Promise) {
             'id': 1,
             'user_id': 1,
             'user_id_shared': 2,
-            'podcast_id':1,
-
+            'podcast_id': 1,
+            'created_at': new Date('2016-06-29 14:26:16 UTC'),
+            'updated_at': new Date('2016-06-29 14:26:16 UTC')
           },
           { // user3 dummy shared with user 2 meghan podcast id 2
             'id': 2,
             'user_id': 3,
             'user_id_shared': 2,
-            'podcast_id':2,
-
+            'podcast_id': 2,
+            'created_at': new Date('2016-06-29 14:26:16 UTC'),
+            'updated_at': new Date('2016-06-29 14:26:16 UTC')
           },
           {  //user3 dummy shared with user 1 grant podcast id 2
             'id': 3,
             'user_id': 3,
             'user_id_shared': 1,
-            'podcast_id':2,
-            
+            'podcast_id': 2,
+            'created_at': new Date('2016-06-29 14:26:16 UTC'),
+            'updated_at': new Date('2016-06-29 14:26:16 UTC')
           }
-
       ]);
-
   })
   .then(function(){
       return knex.raw(`SELECT setval('favorites_id_seq', (SELECT MAX(id) FROM favorites))`)

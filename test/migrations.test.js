@@ -159,8 +159,8 @@ suite('migrations', addDatabaseHooks(() => {
           },
 
           release_date: {
-            type: 'timestamp with time zone',
-            maxLength: null,
+            type: 'character varying',
+            maxLength: 50,
             nullable: true,
             defaultValue: null
           },
@@ -216,81 +216,81 @@ suite('migrations', addDatabaseHooks(() => {
       });
   });
 
-  test('episodes columns', (done) => {
-    knex('episodes').columnInfo()
-      .then((actual) => {
-        const expected = {
-          id: {
-            type: 'integer',
-            maxLength: null,
-            nullable: false,
-            defaultValue: 'nextval(\'episodes_id_seq\'::regclass)'
-          },
-
-          title: {
-            type: 'character varying',
-            maxLength: 150,
-            nullable: false,
-            defaultValue: '\'\'::character varying'
-          },
-
-          description: {
-            type: 'text',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
-          url: {
-            type: 'character varying',
-            maxLength: 255,
-            nullable: false,
-            defaultValue: '\'\'::character varying'
-          },
-
-          podcast_id: {
-            type: 'integer',
-            maxLength: null,
-            nullable: false,
-            defaultValue: null
-          },
-
-          release_date: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
-          created_at: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: false,
-            defaultValue: 'now()'
-          },
-
-          updated_at: {
-            type: 'timestamp with time zone',
-            maxLength: null,
-            nullable: false,
-            defaultValue: 'now()'
-          }
-        };
-
-        for (const column in expected) {
-          assert.deepEqual(
-            actual[column],
-            expected[column],
-            `Column ${column} is not the same`
-          );
-        }
-
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+  // test('episodes columns', (done) => {
+  //   knex('episodes').columnInfo()
+  //     .then((actual) => {
+  //       const expected = {
+  //         id: {
+  //           type: 'integer',
+  //           maxLength: null,
+  //           nullable: false,
+  //           defaultValue: 'nextval(\'episodes_id_seq\'::regclass)'
+  //         },
+  //
+  //         title: {
+  //           type: 'character varying',
+  //           maxLength: 150,
+  //           nullable: false,
+  //           defaultValue: '\'\'::character varying'
+  //         },
+  //
+  //         description: {
+  //           type: 'text',
+  //           maxLength: null,
+  //           nullable: true,
+  //           defaultValue: null
+  //         },
+  //
+  //         url: {
+  //           type: 'character varying',
+  //           maxLength: 255,
+  //           nullable: false,
+  //           defaultValue: '\'\'::character varying'
+  //         },
+  //
+  //         podcast_id: {
+  //           type: 'integer',
+  //           maxLength: null,
+  //           nullable: false,
+  //           defaultValue: null
+  //         },
+  //
+  //         release_date: {
+  //           type: 'timestamp with time zone',
+  //           maxLength: null,
+  //           nullable: true,
+  //           defaultValue: null
+  //         },
+  //
+  //         created_at: {
+  //           type: 'timestamp with time zone',
+  //           maxLength: null,
+  //           nullable: false,
+  //           defaultValue: 'now()'
+  //         },
+  //
+  //         updated_at: {
+  //           type: 'timestamp with time zone',
+  //           maxLength: null,
+  //           nullable: false,
+  //           defaultValue: 'now()'
+  //         }
+  //       };
+  //
+  //       for (const column in expected) {
+  //         assert.deepEqual(
+  //           actual[column],
+  //           expected[column],
+  //           `Column ${column} is not the same`
+  //         );
+  //       }
+  //
+  //       done();
+  //     })
+  //     .catch((err) => {
+  //       done(err);
+  //     });
+  // });
 
   test('favorites columns', (done) => {
     knex('favorites').columnInfo()
@@ -324,12 +324,12 @@ suite('migrations', addDatabaseHooks(() => {
             defaultValue: null
           },
 
-          episode_id: {
-            type: 'integer',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
+          // episode_id: {
+          //   type: 'integer',
+          //   maxLength: null,
+          //   nullable: true,
+          //   defaultValue: null
+          // },
 
           created_at: {
             type: 'timestamp with time zone',
@@ -372,13 +372,6 @@ suite('migrations', addDatabaseHooks(() => {
             defaultValue: 'nextval(\'shared_id_seq\'::regclass)'
           },
 
-          description: {
-            type: 'text',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
-
           comments: {
             type: 'text',
             maxLength: null,
@@ -407,12 +400,12 @@ suite('migrations', addDatabaseHooks(() => {
             defaultValue: null
           },
 
-          episode_id: {
-            type: 'integer',
-            maxLength: null,
-            nullable: true,
-            defaultValue: null
-          },
+          // episode_id: {
+          //   type: 'integer',
+          //   maxLength: null,
+          //   nullable: true,
+          //   defaultValue: null
+          // },
 
           created_at: {
             type: 'timestamp with time zone',

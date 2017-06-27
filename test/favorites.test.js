@@ -139,4 +139,4 @@ suite('favorites', addDatabaseHooks(() => {
   //       .expect(401, 'Unauthorized', done);
   //   });
   // }));
-}))
+}));
