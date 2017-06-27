@@ -35,11 +35,12 @@ const path = require('path');
 
 const favorites = require('./routes/favorites');
 const shared = require('./routes/shared');
-const users = require('./routes/users');
+const login = require('./routes/login');
+const register = require('./routes/register');
 
 app.use('/shared', books);
 app.use('/favorites', favorites);
-app.use('/users', users);
+app.use('/login', login);
 
 // default (no route specified 404)
 app.use((_req, res) => {
