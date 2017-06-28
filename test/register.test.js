@@ -1,7 +1,6 @@
 'use strict';
 
 process.env.NODE_ENV = 'development';
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const assert = require('chai').assert;
 const { suite, test } = require('mocha');
@@ -13,29 +12,31 @@ const { addDatabaseHooks } = require('./utils');
 
 suite('register', addDatabaseHooks(() => {
   const password = 'psychology';
-  test.only('POST /register', (done) => {
+  test('POST /register', (done) => {
 
     request(server)
       .post('/register')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
-        first_name: 'Carl',
-        last_name: 'Jung',
+        firstName: 'Carl',
+        lastName: 'Jung',
         email: 'cgjung@gmail.com',
         password: password
       })
       .expect((res) => {
-        //console.log(res, 'test response');
         delete res.body.createdAt;
         delete res.body.updatedAt;
       })
-      .expect(200, `Thanks for registering Carl! You are now able to log in to your account`)
+      .expect(200, {
+        id: 4,
+        firstName: 'Carl',
+        lastName: 'Jung',
+        email: 'cgjung@gmail.com'
+      })
       .expect('Content-Type', /json/)
       .end((httpErr, _res) => {
-        //console.log('HREEEEEEEEE', _res);
         if (httpErr) {
-          console.log(httpErr);
           return done(httpErr);
         }
 
