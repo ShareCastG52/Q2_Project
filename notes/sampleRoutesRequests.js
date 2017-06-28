@@ -11,15 +11,11 @@ http -p HBhb POST localhost:8001/users/2 author='Changed author'
 //POST login
 http -p HBhb POST localhost:8001/login password='Meghan' email='m.m.hares@gmail.com'
 
-
-http -p HBhb POST localhost:8001/users/2 genre='Changed genre'
-http -p HBhb POST localhost:8001/users/2 description='Changed desc'
-http -p HBhb POST localhost:8001/users/2 cover_url='Changed URL'
-
-//POST bad - index too high
-http -p HBhb POST localhost:8001/books/999 cover_url='Changed URL'
+http -p HBhb GET localhost:8001/favorites/
+http -p HBhb GET localhost:8001/favorites/2
 //bad - index too low
-http -p HBhb POST localhost:8001/books/-1 cover_url='Changed URL'
+http -p HBhb POST localhost:8001/favorites/2
+http -p HBhb POST localhost:8001/favorites/-1 cover_url='Changed URL'
 //bad - index nan
 http -p HBhb POST localhost:8001/books/hi cover_url='Changed URL'
 
