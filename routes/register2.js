@@ -42,22 +42,22 @@ router.post('/', verifyLoginDetails, (req, res, next) => {
 
 
 function verifyLoginDetails(req, res, next) {
-    let firstName = req.body.firstName;
-    let lastName = req.body.lastName;
+    let first_name = req.body.first_name;
+    let last_name = req.body.last_name;
     let email = req.body.email;
     let password = req.body.password;
 
-    if (firstName && lastName && email && password) {
+    if (first_name && last_name && email && password) {
       next();
       return;
     }
     else if (!email) {
       res.status(400).send("Email must not be blank");
     }
-    else if (!lastName) {
+    else if (!last_name) {
       res.status(400).send("Last name must not be blank");
     }
-    else if (!firstName) {
+    else if (!first_name) {
       res.status(400).send("First name must not be blank");
     }
     else if (!password) {
