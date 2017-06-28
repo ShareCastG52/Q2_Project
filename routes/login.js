@@ -50,12 +50,11 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
             res.status(400).send('Email or password doesn\'t match, try again');
             return;
           }
-          res.setHeader('Content-Type', 'application/json')
-          res.status(500).send(err)
+          res.setHeader('Content-Type', 'application/json');
+          res.status(500).send(err);
         });
 
       });
-
 
 
 // route.get('/', verifyLoginDetails, (req, res, next) => {

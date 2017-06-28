@@ -39,6 +39,7 @@ const register = require('./routes/register');
 // app.use('/shared', shared);
 app.use('/favorites', favorites);
 app.use('/login', login);
+app.use('/register', register);
 
 // default (no route specified 404)
 app.use((_req, res) => {
