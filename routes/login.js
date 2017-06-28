@@ -17,7 +17,7 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
   let email, hashed_password, id;
         repo.authenticate (req.body.email)
         .then((credentials) => {
-           {email, hashed_password, id} = credentials;
+          const {email, hashed_password, id} = credentials;
 
           return email, hashed_password, id;
         })
@@ -45,7 +45,7 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
           }
           // NOTE decide between JWT_KEY and TOKEN_SECRET
           // let newToken = jwt.sign(payload, process.env.JWT_KEY);
-          const secret = process.env.TOKEN_SECRET;
+          const secret = process.env.JWT_KEY;
           const token = jwt.sign(jwtPayload, secret);
           console.log(token);
           res.cookie('token', token, {httpOnly: true });
