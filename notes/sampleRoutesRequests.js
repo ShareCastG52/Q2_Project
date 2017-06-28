@@ -1,5 +1,5 @@
 //POST register / update()
-http -p HBhb POST localhost:8001/users/2 password='Meghan' firstName='Meghan' lastName="Prestemon" email='m.m.hares@gmail.com'
+http -p HBhb POST localhost:8001/register password='Meghan' firstName='Mehan' lastName="Prstemon" email='m.m.hres@gmail.com'
 http -p HBhb POST localhost:8001/users/2 author='Changed author'
 
 

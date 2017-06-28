@@ -4,62 +4,57 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const Repo = require('../src/user-repository');
 const humps = require('humps');
+const jwt = require('jsonwebtoken');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 let repo = new Repo();
 const saltRounds = 10;
-const jwt = require('jsonwebtoken');
 
 //verifies an established user to DB
 router.post('/' , verifyLoginDetails, (req, res, next) => {
-
 // Store hash in your password DB with storePasswords Fn
-  let email, hashed_password, id;
-        repo.authenticate (req.body.email)
+
+  let userCredentials;
+
+      repo.authenticate (req.body.email)
         .then((credentials) => {
-           {email, hashed_password, id} = credentials;
-
-          return email, hashed_password, id;
-        })
-        .then((input) => {
-            //inout is foo
-          return bcrypt.compare(req.body.password, hashed_password)
-
+          if (!credentials) {
+            throw new Error('ERROR_NO_MATCH');
+          }
+          userCredentials = credentials;
+          return bcrypt.compare(req.body.password, credentials.hashed_password)
         })
         .then((successfulLogin) => {
           if (!successfulLogin) {
-            res.header('Content-Type', 'application/json');
-            res.status(400).send('Email or password don\'t match, try again');
-            return;
+            throw new Error('ERROR_NO_MATCH');
           }
 
-          // TODO pickup coding HERE NOTE
           const jwtPayload ={
             iss: "ShareCast",
             sub: {
-              email: email,
-              id: id
+              email: userCredentials.email,
+              id: userCredentials.id
             },
-            exp: math.floor(Date.now()/ 1000) + 60*60*24,
+            exp: Math.floor(Date.now()/ 1000) + 60*60*24,
             loggedIn: true
-          }
-          // NOTE decide between JWT_KEY and TOKEN_SECRET
-          // let newToken = jwt.sign(payload, process.env.JWT_KEY);
-          const secret = process.env.TOKEN_SECRET;
+          };
+
+          const secret = process.env.JWT_KEY;
           const token = jwt.sign(jwtPayload, secret);
-          console.log(token);
           res.cookie('token', token, {httpOnly: true });
           // NOTE should send JSON back check in tests
-          res.status(200).send([id, email]);
-
+          res.status(200).send(jwtPayload.sub);
         })
         .catch(err => {
-          res.setHeader('Content-Type', 'application/json')
-          res.status(500).send(err)
+          if (err.message === 'ERROR_NO_MATCH') {
+            res.status(400).send('Email or password doesn\'t match, try again');
+            return;
+          }
+          res.setHeader('Content-Type', 'application/json');
+          res.status(500).send(err);
         });
 
       });
-
 
 
 // route.get('/', verifyLoginDetails, (req, res, next) => {
@@ -85,16 +80,13 @@ function verifyLoginDetails(req, res, next) {
       return;
     }
     else if (!email) {
-      res.setHeader('Content-Type', 'application/json');
       res.status(400).send("Email must not be blank");
     }
     else if (!password) {
-      res.setHeader('Content-Type', 'application/json');
       res.status(400).send("Password must not be blank");
     }
     // NOTE do we even need this given the above else if's? and wouldn't this be handled by form validation?
     else {
-      res.setHeader('Content-Type', 'application/json');
       res.status(400).send("Incorrect credentials");
     }
 };

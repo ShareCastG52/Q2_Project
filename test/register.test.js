@@ -1,37 +1,41 @@
 'use strict';
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'development';
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const bcrypt = require('bcrypt');
 const request = require('supertest');
 const knex = require('../knex');
-const server = require('../server');
-const { addDatabaseHooks } = require('./utils')
+const server = require('../index');
+const { addDatabaseHooks } = require('./utils');
 
 suite('register', addDatabaseHooks(() => {
-  test('POST /register', (done) => {
-    const password = 'psychology';
+  const password = 'psychology';
+  test.only('POST /register', (done) => {
 
     request(server)
       .post('/register')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
-        firstName: 'Carl',
-        lastName: 'Jung',
+        first_name: 'Carl',
+        last_name: 'Jung',
         email: 'cgjung@gmail.com',
-        password
+        password: password
       })
       .expect((res) => {
+        //console.log(res, 'test response');
         delete res.body.createdAt;
         delete res.body.updatedAt;
       })
       .expect(200, `Thanks for registering Carl! You are now able to log in to your account`)
       .expect('Content-Type', /json/)
       .end((httpErr, _res) => {
+        //console.log('HREEEEEEEEE', _res);
         if (httpErr) {
+          console.log(httpErr);
           return done(httpErr);
         }
 
@@ -64,7 +68,7 @@ suite('register', addDatabaseHooks(() => {
       });
   });
 
-    test('POST /register with no email', (done) => {
+  test('POST /register with no email', (done) => {
     request(server)
       .post('/register')
       .set('Accept', 'application/json')
@@ -74,7 +78,7 @@ suite('register', addDatabaseHooks(() => {
         lastName: 'Jung',
         password
       })
-      .expect('Content-Type', /json/)
+      .expect('Content-Type', /text/)
       .expect(400, 'Email must not be blank', done);
   });
 
@@ -88,7 +92,7 @@ suite('register', addDatabaseHooks(() => {
         lastName: 'Jung',
         email: 'cgjung@gmail.com'
       })
-      .expect('Content-Type', /json/)
+      .expect('Content-Type', /text/)
       .expect(400, 'Password must not be blank', done);
   });
 
@@ -112,8 +116,8 @@ suite('register', addDatabaseHooks(() => {
             email: 'cgjung@gmail.com',
             password: 'psychology'
           })
-          .expect('Content-Type', /plain/)
-          .expect(400, 'Our records indicate a user with this email already exists', done);
+          .expect('Content-Type', /text/)
+          .expect(400, 'Our records indicate that this email is already registered to our system', done);
       })
       .catch((err) => {
         done(err);
