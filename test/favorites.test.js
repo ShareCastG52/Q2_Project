@@ -26,7 +26,7 @@ suite('favorites', addDatabaseHooks(() => {
             return done(err);
           }
 
-          agent.saveCookies(res);
+          // agent.saveCookies(res);
           done();
         });
     });
