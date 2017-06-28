@@ -10,9 +10,24 @@ const router = express.Router();
 let repo = new Repo();
 const saltRounds = 10;
 
-//verifies an established user to DB
+/**
+* @api {post} /login Authenticate user
+* @apiVersion 1.0.0
+* @apiName PostLogin
+* @apiGroup Login
+*
+* @apiSuccess {Object}  jwtPayload.sub        User information.
+* @apiSuccess {Number}  jwtPayload.sub.id     User's id.
+* @apiSuccess {String}  jwtPayload.sub.email  User's email.
+* @apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 OK
+    {
+    id: 2,
+    email: 'm.m.hares@gmail.com'
+    }
+*/
+
 router.post('/' , verifyLoginDetails, (req, res, next) => {
-// Store hash in your password DB with storePasswords Fn
 
   let userCredentials;
 

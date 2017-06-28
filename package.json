@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Repo for ShareCast, the social way to share and discuss podcasts with friends.",
   "main": "index.js",
+  "apidoc": {
+    "title": "ShareCast",
+    "url": "https://api.sharecast.com/v1"
+  },
   "directories": {
     "test": "test"
   },

@@ -27,6 +27,7 @@ router.get('/', (req, res, next) => {
   }
 
   favoritesRepo.query(userId).then((favorites) => {
+    res.setHeader('Content-Type', 'application/json');
     res.send(camelizeKeys(favorites));
   })
   .catch(err => next(err));
