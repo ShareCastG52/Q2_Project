@@ -29,7 +29,7 @@ router.get('/', (req, res, next) => {
 });
 
 
-router.post('/', (req, res, next) => {
+router.post('/', checkForToken, verifyUser, (req, res, next) => {
   let podcastItunesId = req.body.collectionId;
   let userId = getUserId(req);
   let podcastData;
