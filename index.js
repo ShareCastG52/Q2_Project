@@ -1,7 +1,7 @@
 'use strict';
-
 require('dotenv').config();
 
+const helmet = require('helmet');
 const express = require('express');
 const app = express();
 const humps = require('humps');
@@ -30,6 +30,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 const path = require('path');
+app.use(helmet());
 
 const favorites = require('./routes/favorites');
 // const shared = require('./routes/shared');
