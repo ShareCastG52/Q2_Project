@@ -23,7 +23,7 @@ class FavoritesRepository {
   }
 
   createRelationship(userId, newFavoriteData) {
-    
+
     return knex('favorites')
       .insert({
         user_id: userId,
@@ -37,7 +37,7 @@ class FavoritesRepository {
     knex('favorites')
     .where({podcast_id: favoriteId, user_id: userId})
     .del()
-    .returning(['id', 'user_id'])
+    .returning("*")
   }
 }
 

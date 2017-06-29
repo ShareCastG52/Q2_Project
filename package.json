@@ -36,14 +36,14 @@
     "jsonwebtoken": "^7.4.1",
     "knex": "^0.13.0",
     "morgan": "^1.8.2",
-    "pg": "^6.4.0"
+    "pg": "^6.4.0",
+    "supertest": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^4.0.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
-    "nyc": "^11.0.3",
-    "supertest": "^3.0.0"
+    "nyc": "^11.0.3"
   }
 }
