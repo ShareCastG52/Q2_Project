@@ -134,9 +134,6 @@ const ITUNES_PODCAST_LOOKUP_BASE_URL = "https://itunes.apple.com/lookup?id="
         "trackViewUrl": "https://itunes.apple.com/us/podcast/goop-directory-the-by-burgess-frank-gelett/id733259146?mt=2&uo=4"
       }
  *
- * @apiErrorExample {json} Unauthorized user
- *    HTTP/1.1 400 "Unauthorized"
- *
  * @apiErrorExample {json}  List error
  *    HTTP/1.1 500 Internal Server Error
  */
@@ -153,6 +150,39 @@ router.get('/', (req, res, next) => {
       res.status(500).send(err);
     });
 });
+
+/**
+ * @api {post} /search Authenticate user
+ * @apiVersion 1.0.0
+ * @apiName PostSearch
+ * @apiGroup Search
+ *
+ * @apiParam {Number} collectionId     Podcast ID for iTunes..
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      collectionId: 411534351
+ *    }
+ *
+ * @apiSuccess {Object}  newFavorite               Favorite podcast information.
+ * @apiSuccess {Number}  newFavorite.id            Favorite podcast's unique id.
+ * @apiSuccess {Number}  newFavorite.podcastId     Unique id of the podcast.
+ * @apiSuccess {Number}  newFavorite.userId        User's id.
+ * @apiSuccess {Number}  newFavorite/userIdShared  Id of user you are sharing with.
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      id: 5,
+ *      podcastId: 3,
+ *      userId: 2,
+ *      userIdShared: null
+ *    }
+ *
+ * @apiErrorExample {json} Unauthorized user
+ *    HTTP/1.1 400 "Unauthorized"
+ *
+ * @apiErrorExample {json}  List error
+ *    HTTP/1.1 500 Internal Server Error
+ */
 
 router.post('/', checkForToken, verifyUser, (req, res, next) => {
   let podcastItunesId = req.body.collectionId;
