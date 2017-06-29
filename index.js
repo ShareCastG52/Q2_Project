@@ -1,7 +1,7 @@
 'use strict';
-
 require('dotenv').config();
 
+const helmet = require('helmet');
 const express = require('express');
 const app = express();
 const humps = require('humps');
@@ -10,8 +10,6 @@ const bcrypt = require('bcrypt');  //NOTE might be for routes subFolder
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-
-app.disable('x-powered-by');
 
 switch (app.get('env')) {
   case 'development':
@@ -28,6 +26,7 @@ switch (app.get('env')) {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(helmet());
 
 const path = require('path');
 
