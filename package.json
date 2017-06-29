@@ -2,6 +2,10 @@
   "name": "sharecast",
   "version": "1.0.0",
   "description": "Repo for ShareCast, the social way to share and discuss podcasts with friends.",
+  "apidoc": {
+    "title": " A slick spot for our API routing information",
+    "url": "https://api.github.com/ShareCastG52/Q2_Project"
+  },
   "main": "index.js",
   "apidoc": {
     "title": "ShareCast",
@@ -12,7 +16,8 @@
   },
   "scripts": {
     "knex": "knex",
-    "test": "mocha"
+    "test": "mocha",
+    "testnyc": "nyc mocha"
   },
   "repository": {
     "type": "git",
@@ -38,12 +43,16 @@
     "pg": "^6.4.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
+
+    
+
   },
   "devDependencies": {
     "chai": "^4.0.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
-    "supertest": "^3.0.0"
+    "nyc": "^11.0.3"
+    "supertest": "^1.2.0"
   }
 }
