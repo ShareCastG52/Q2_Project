@@ -5,7 +5,7 @@ const express = require('express');
 const Repo = require('../src/user-repository');
 const humps = require('humps');
 const jwt = require('jsonwebtoken');
-
+// eslint-disable-next-line new-cap
 const router = express.Router();
 let repo = new Repo();
 const saltRounds = 10;
@@ -45,7 +45,6 @@ const saltRounds = 10;
  */
 
 router.post('/' , verifyLoginDetails, (req, res, next) => {
-
   let userCredentials;
 
       repo.authenticate (req.body.email)
@@ -54,6 +53,7 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
             throw new Error('ERROR_NO_MATCH');
           }
           userCredentials = credentials;
+          console.log('CREDENTIALS', userCredentials, 'IN LOGIN.JS LINE 25');
           return bcrypt.compare(req.body.password, credentials.hashed_password)
         })
         .then((successfulLogin) => {
@@ -71,9 +71,10 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
             loggedIn: true
 
           };
-
+          console.log('jwtPayload.sub', jwtPayload.sub, 'IN LOGIN.JS LINE 43' );
           const secret = process.env.JWT_KEY;
           const token = jwt.sign(jwtPayload, secret);
+
           res.cookie('token', token, {httpOnly: true });
           // NOTE should send JSON back check in tests
           res.status(200).send(jwtPayload.sub);
