@@ -8,38 +8,31 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 const FavoritesRepository = require('../src/favorites-repository');
 const favoritesRepo = new FavoritesRepository();
 
-// eslint-disable-next-line new-cap
 const router = express.Router();
 
 router.get('/', checkForToken, verifyUser, (req, res, next) => {
   let userId = getUserId(req);
-  // console.log('userId', userId);
   if (!userId) {
-    res.header('Content-Type', 'application/json');
     return res.status(401).send('Unauthorized')
   }
 
   favoritesRepo.queryAll(userId).then((favorites) => {
-    console.log('FAVORITE', favorites);
     res.send(camelizeKeys(favorites));
   })
   .catch(err =>
     res.status(500).send(err));
-  // .catch(err => next(err));
 });
 
 //get a single 'favorited' podcast by its id (found through favorites)
 router.get('/:id', checkForToken, verifyUser,  (req, res, next) => {
   let userId = getUserId(req);
   if (!userId) {
-    res.header('Content-Type', 'application/json');
     return res.status(401).send('Unauthorized')
   }
 
   let favoritesId = req.params.id;
 
   favoritesRepo.getFav(userId, favoritesId).then(favorite => {
-
     res.send(camelizeKeys(favorite));
   })
   .catch(err =>
@@ -50,7 +43,6 @@ router.get('/:id', checkForToken, verifyUser,  (req, res, next) => {
 router.post('/', checkForToken, verifyUser, (req, res, next) => {
   let userId = getUserId(req);
   if (!userId) {
-    res.header('Content-Type', 'application/json');
     return res.status(401).send('Unauthorized')
   }
 
@@ -66,10 +58,8 @@ router.post('/', checkForToken, verifyUser, (req, res, next) => {
 router.delete('/', checkForToken, verifyUser, (req, res, next) => {
   let userId = getUserId(req);
   if (!userId) {
-    res.header('Content-Type', 'application/json');
     return res.status(401).send('Unauthorized')
   }
-
   let favoriteId = req.body.favoriteId;
 
   favoritesRepo.delete(userId, favoriteId).then((favorites) => {
@@ -90,7 +80,6 @@ function checkForToken(req, res, next){
     next();
     return;
   }
-  res.setHeader('Content-Type', 'application/json');
   res.status(401).send('Unauthorized');
 }
 
@@ -100,8 +89,6 @@ function verifyUser(req, res, next){
       next();
       return;
     }
-
-    res.setHeader('Content-Type', 'application/json');
     res.status(401).send('Unauthorized');
   });
 }

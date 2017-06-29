@@ -53,7 +53,6 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
             throw new Error('ERROR_NO_MATCH');
           }
           userCredentials = credentials;
-          console.log('CREDENTIALS', userCredentials, 'IN LOGIN.JS LINE 25');
           return bcrypt.compare(req.body.password, credentials.hashed_password)
         })
         .then((successfulLogin) => {
@@ -71,7 +70,6 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
             loggedIn: true
 
           };
-          console.log('jwtPayload.sub', jwtPayload.sub, 'IN LOGIN.JS LINE 43' );
           const secret = process.env.JWT_KEY;
           const token = jwt.sign(jwtPayload, secret);
 
