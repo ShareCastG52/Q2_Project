@@ -13,6 +13,6 @@ Changing lives, one podcast at a time.
 6. ```knex migrate:latest```
 7. ```knex seed:run```
 8. Review apiDoc documentation:
-    a. Navigate to the root folder of ShareCast
-    b. ```cd apidoc/```
-    c. ```open index.html``` to open apiDoc in browser
+    * Navigate to the root folder of ShareCast
+    * ```cd apidoc/```
+    * ```open index.html``` to open apiDoc in browser
