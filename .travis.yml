@@ -1,3 +1,4 @@
-language: node_js
+language: node_jsgit
+
 rvm:
   -8.0.0
