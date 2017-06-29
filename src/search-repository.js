@@ -71,7 +71,7 @@ class SearchRepository {
     return knex('favorites')
       .insert({
         user_id: userId,
-        podcast_id: podcastId.id,
+        podcast_id: podcastId[0],
         // episode_id: newFavoriteData.episodeId
         }, '*')
   }
