@@ -22,7 +22,8 @@ router.get('/', checkForToken, verifyUser, (req, res, next) => {
   favoritesRepo.queryAll(userId).then((favorites) => {
     res.send(camelizeKeys(favorites));
   })
-  .catch(err => err);
+  .catch(err =>
+    res.status(500).send(err));
   // .catch(err => next(err));
 });
 
@@ -40,7 +41,8 @@ router.get('/:id', checkForToken, verifyUser,  (req, res, next) => {
 
     res.send(camelizeKeys(favorite));
   })
-  .catch(err => next(err));
+  .catch(err =>
+    res.status(500).send(err));
 });
 
 // add podcast to favorites table by single user
