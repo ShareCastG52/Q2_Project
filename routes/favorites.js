@@ -12,14 +12,16 @@ const favoritesRepo = new FavoritesRepository();
 const router = express.Router();
 
 router.get('/', checkForToken, verifyUser, (req, res, next) => {
-
+  console.log("req cookie -->", req.cookies, 'req.body --->', req.body);
   let userId = getUserId(req);
+  // console.log('userId', userId);
   if (!userId) {
     res.header('Content-Type', 'application/json');
     return res.status(401).send('Unauthorized')
   }
 
   favoritesRepo.queryAll(userId).then((favorites) => {
+    console.log('FAVORITE', favorites);
     res.send(camelizeKeys(favorites));
   })
   .catch(err =>

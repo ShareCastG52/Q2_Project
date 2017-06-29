@@ -18,8 +18,8 @@ suite('favorites', addDatabaseHooks(() => {
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .send({
-          email: 'm.m.hares@gmail.com',
-          password: 'Meghan'
+          email: 'emailgdw@gmail.com',
+          password: 'Grant'
         })
         .end((err, res) => {
           if (err) {
@@ -31,12 +31,37 @@ suite('favorites', addDatabaseHooks(() => {
         });
     });
 
-    test('GET /favorites', (done) => {
+    test.only('GET /favorites', (done) => {
       agent
+        // .set('cookie', ['token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJTaGFyZUNhc3QiLCJzdWIiOnsiZW1haWwiOiJtLm0uaGFyZXNAZ21haWwuY29tIiwiaWQiOjJ9LCJleHAiOjE0OTg3ODg3MTYsImxvZ2dlZEluIjp0cnVlLCJpYXQiOjE0OTg3MDIzMTZ9._KDWTCyv5cO8MDdmbqQ595g36PzoPr9V0woI3tAWsgA'])
         .get('/favorites')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, [{
+          "artistId": 1134742667,
+          "collectionId": 948976028,
+          "track_id": 948976028,
+          "artistName": "Stories Podcast / Wondery",
+          "collection_name": "Stories Podcast - A Free Children's Story Podcast for Bedtime, Car Rides, and Kids of All Ages!",
+          "artistViewUrl": "https://itunes.apple.com/us/artist/wondery/id1134742667?mt=2&uo=4",
+          "collection_view_url": "https://itunes.apple.com/us/podcast/stories-podcast-free-childrens-story-podcast-for-bedtime/id948976028?mt=2&uo=4",
+          "feed_url": "http://rss.art19.com/stories-podcast",
+          "track_view_url": "https://itunes.apple.com/us/podcast/stories-podcast-free-childrens-story-podcast-for-bedtime/id948976028?mt=2&uo=4",
+          "artwork_url_60": "http://is1.mzstatic.com/image/thumb/Music62/v4/ce/22/03/ce220318-10da-b927-16fb-ab5479045e1b/source/60x60bb.jpg",
+          "release_date": "2017-06-14T21:51:00Z",
+          "artwork_url_600": "http://is1.mzstatic.com/image/thumb/Music62/v4/ce/22/03/ce220318-10da-b927-16fb-ab5479045e1b/source/600x600bb.jpg",
+          "genre_ids": [
+            "1305",
+            "26",
+            "1301",
+            "1304"
+          ],
+          "genres": [
+            "Kids & Family",
+            "Podcasts",
+            "Arts",
+            "Education"
+          ],
           'id': 1,
           'user_id': 1,
           'user_id_shared': 2,

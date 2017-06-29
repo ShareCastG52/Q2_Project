@@ -5,46 +5,14 @@ const express = require('express');
 const Repo = require('../src/user-repository');
 const humps = require('humps');
 const jwt = require('jsonwebtoken');
-
+// eslint-disable-next-line new-cap
 const router = express.Router();
 let repo = new Repo();
 const saltRounds = 10;
 
-/**
- * @api {post} /login Authenticate user
- * @apiVersion 1.0.0
- * @apiName PostLogin
- * @apiGroup Login
- *
- * @apiParam {String} email     Mandatory user email.
- * @apiParam {String} password  Mandatory user password.
- * @apiParamExample {json} Request-Example:
- *    {
- *      email: 'm.m.hares@gmail.com',
- *      password: 'Meghan'
- *    }
- *
- * @apiSuccess {Object}  jwtPayload.sub        User information.
- * @apiSuccess {Number}  jwtPayload.sub.id     User's id.
- * @apiSuccess {String}  jwtPayload.sub.email  User's email.
- * @apiSuccessExample {json} Success-Response:
- *    HTTP/1.1 200 OK
- *    {
- *      id: 2,
- *      email: 'm.m.hares@gmail.com'
- *    }
- *
- * @apiErrorExample {json} Email not found
- *    HTTP/1.1 400 "Email or password doesn't match, try again"
- *
- * @apiErrorExample {json} Password not found
- *    HTTP/1.1 400 "Email or password doesn't match, try again"
- *
- * @apiErrorExample {json}  List error
- *    HTTP/1.1 500 Internal Server Error
- */
-
+//verifies an established user to DB
 router.post('/' , verifyLoginDetails, (req, res, next) => {
+// Store hash in your password DB with storePasswords Fn
 
   let userCredentials;
 
@@ -54,6 +22,7 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
             throw new Error('ERROR_NO_MATCH');
           }
           userCredentials = credentials;
+          console.log('CREDENTIALS', userCredentials, 'IN LOGIN.JS LINE 25');
           return bcrypt.compare(req.body.password, credentials.hashed_password)
         })
         .then((successfulLogin) => {
@@ -71,9 +40,10 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
             loggedIn: true
 
           };
-
+          console.log('jwtPayload.sub', jwtPayload.sub, 'IN LOGIN.JS LINE 43' );
           const secret = process.env.JWT_KEY;
           const token = jwt.sign(jwtPayload, secret);
+
           res.cookie('token', token, {httpOnly: true });
           // NOTE should send JSON back check in tests
           res.status(200).send(jwtPayload.sub);

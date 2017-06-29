@@ -7,13 +7,15 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 class FavoritesRepository {
 
   queryAll(userId) {
+    console.log(userId);
     return knex('podcasts')
       .leftJoin('favorites', 'podcasts.id', 'favorites.podcast_id')
 
       // NOTE episodes table will require utilizing a different API as Itunes doesn't allow for episodes taggin within podcasts, sad I know
       // .leftJoin('episodes', 'episodes.id', 'favorites.episode_id')
       //may need right join, not left join
-      .where('user_id', userId)
+      .where('favorites.user_id', userId)
+
   }
 
   getFav(userId, favoritesId) {
