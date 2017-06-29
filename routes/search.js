@@ -28,7 +28,6 @@ router.get('/', (req, res, next) => {
     });
 });
 
-
 router.post('/', checkForToken, verifyUser, (req, res, next) => {
   let podcastItunesId = req.body.collectionId;
   let userId = getUserId(req);
@@ -51,7 +50,7 @@ router.post('/', checkForToken, verifyUser, (req, res, next) => {
       return searchRepo.createFavoritesEntry(userId, podcastId);
     })
     .then(newFavorite => {
-      res.status(200).send(humps.camelizeKeys(newFavorite));
+      res.status(200).send(humps.camelizeKeys(newFavorite[0]));
     })
     .catch(err => {
       res.setHeader('Content-Type', 'application/json');
@@ -69,7 +68,6 @@ function checkForToken(req, res, next){
     next();
     return;
   }
-  res.setHeader('Content-Type', 'application/json');
   res.status(401).send('Unauthorized');
 }
 
@@ -80,7 +78,6 @@ function verifyUser(req, res, next){
       next();
       return;
     }
-    res.setHeader('Content-Type', 'application/json');
     res.status(401).send('Unauthorized');
   });
 }
