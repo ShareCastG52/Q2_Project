@@ -32,14 +32,16 @@ app.use(cookieParser());
 const path = require('path');
 
 const favorites = require('./routes/favorites');
-const shared = require('./routes/shared');
+// const shared = require('./routes/shared');
 const login = require('./routes/login');
 const register = require('./routes/register');
+const search = require('./routes/search')
 
 // app.use('/shared', shared);
 app.use('/favorites', favorites);
 app.use('/login', login);
 app.use('/register', register);
+app.use('/search', search);
 
 // default (no route specified 404)
 app.use((_req, res) => {
