@@ -2,6 +2,5 @@
 .env
 node_modules
 notes
-apidoc
 .nyc_output
 coverage
