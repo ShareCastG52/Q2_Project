@@ -9,6 +9,57 @@ const router = express.Router();
 let repo = new Repo();
 const saltRounds = 10;
 
+/**
+ * @api {post} /register Register new user
+ * @apiVersion 1.0.0
+ * @apiName PostRegister
+ * @apiGroup Register
+ *
+ * @apiParam {String} firstName Mandatory user first name.
+ * @apiParam {String} lastName  Mandatory user last name.
+ * @apiParam {String} email     Mandatory user email.
+ * @apiParam {String} password  Mandatory user password.
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      firstName: 'Carl',
+ *      lastName: 'Jung',
+ *      email: 'cgjung@gmail.com',
+ *      password: 'psychology'
+ *    }
+ *
+ * @apiSuccess {Object}  newEntry[0]            User information.
+ * @apiSuccess {Number}  newEntry[0].id         User's id.
+ * @apiSuccess {String}  newEntry[0].firstName  User's first name.
+ * @apiSuccess {String}  newEntry[0].lastName   User's last name.
+ * @apiSuccess {String}  newEntry[0].email      User's email.
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      id: 4,
+ *      firstName: 'Carl',
+ *      lastName: 'Jung',
+ *      email: 'cgjung@gmail.com'
+ *    }
+ *
+ * @apiErrorExample {json} User already exists
+ *    HTTP/1.1 400 "Our records indicate that this email is already registered to our system"
+ *
+ * @apiErrorExample {json} No first name provided
+ *    HTTP/1.1 400 "First name must not be blank"
+ *
+ * @apiErrorExample {json} No last name provided
+ *    HTTP/1.1 400 "Last name must not be blank"
+ *
+ * @apiErrorExample {json} No email provided
+ *    HTTP/1.1 400 "Email must not be blank"
+ *
+ * @apiErrorExample {json} No password provided
+ *    HTTP/1.1 400 "Password must not be blank"
+ *
+ * @apiErrorExample {json}  List error
+ *    HTTP/1.1 500 Internal Server Error
+ */
+
 router.post('/', verifyLoginDetails, (req, res, next) => {
 
   repo.checkIfUserIsRegistered(req.body.email)

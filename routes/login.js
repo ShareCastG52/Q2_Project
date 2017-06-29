@@ -5,14 +5,46 @@ const express = require('express');
 const Repo = require('../src/user-repository');
 const humps = require('humps');
 const jwt = require('jsonwebtoken');
-// eslint-disable-next-line new-cap
+
 const router = express.Router();
 let repo = new Repo();
 const saltRounds = 10;
 
-//verifies an established user to DB
+/**
+ * @api {post} /login Authenticate user
+ * @apiVersion 1.0.0
+ * @apiName PostLogin
+ * @apiGroup Login
+ *
+ * @apiParam {String} email     Mandatory user email.
+ * @apiParam {String} password  Mandatory user password.
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      email: 'm.m.hares@gmail.com',
+ *      password: 'Meghan'
+ *    }
+ *
+ * @apiSuccess {Object}  jwtPayload.sub        User information.
+ * @apiSuccess {Number}  jwtPayload.sub.id     User's id.
+ * @apiSuccess {String}  jwtPayload.sub.email  User's email.
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      id: 2,
+ *      email: 'm.m.hares@gmail.com'
+ *    }
+ *
+ * @apiErrorExample {json} Email not found
+ *    HTTP/1.1 400 "Email or password doesn't match, try again"
+ *
+ * @apiErrorExample {json} Password not found
+ *    HTTP/1.1 400 "Email or password doesn't match, try again"
+ *
+ * @apiErrorExample {json}  List error
+ *    HTTP/1.1 500 Internal Server Error
+ */
+
 router.post('/' , verifyLoginDetails, (req, res, next) => {
-// Store hash in your password DB with storePasswords Fn
 
   let userCredentials;
 
