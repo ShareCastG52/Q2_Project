@@ -152,22 +152,22 @@ router.get('/', (req, res, next) => {
 });
 
 /**
- * @api {post} /search Authenticate user
+ * @api {post} /search Create podcasts and favorites entry
  * @apiVersion 1.0.0
  * @apiName PostSearch
  * @apiGroup Search
  *
- * @apiParam {Number} collectionId     Podcast ID for iTunes..
+ * @apiParam {Number} collectionId  Podcast ID for iTunes.
  * @apiParamExample {json} Request-Example:
  *    {
  *      collectionId: 411534351
  *    }
  *
  * @apiSuccess {Object}  newFavorite               Favorite podcast information.
- * @apiSuccess {Number}  newFavorite.id            Favorite podcast's unique id.
- * @apiSuccess {Number}  newFavorite.podcastId     Unique id of the podcast.
- * @apiSuccess {Number}  newFavorite.userId        User's id.
- * @apiSuccess {Number}  newFavorite/userIdShared  Id of user you are sharing with.
+ * @apiSuccess {Number}  newFavorite.id            Favorite podcast's unique ID.
+ * @apiSuccess {Number}  newFavorite.podcastId     Unique ID of the podcast.
+ * @apiSuccess {Number}  newFavorite.userId        User's ID.
+ * @apiSuccess {Number}  newFavorite.userIdShared  ID of user you are sharing with.
  * @apiSuccessExample {json} Success-Response:
  *    HTTP/1.1 200 OK
  *    {

@@ -150,7 +150,12 @@ suite('favorites', addDatabaseHooks(() => {
           delete res.body.createdAt;
           delete res.body.updatedAt;
         })
-        .expect(200, { id: 5, podcastId: 2, userId: 1, userIdShared: null }, done);
+        .expect(200, {
+          id: 5,
+          podcastId: 2,
+          userId: 1,
+          userIdShared: null
+        }, done);
     });
 
     test('DELETE /favorites', (done) => {
@@ -164,7 +169,12 @@ suite('favorites', addDatabaseHooks(() => {
           delete res.body.createdAt;
           delete res.body.updatedAt;
         })
-        .expect(200, { id: 1, podcastId: 1, userId: 1, userIdShared: 2 }, done);
+        .expect(200, {
+          id: 1,
+          podcastId: 1,
+          userId: 1,
+          userIdShared: 2
+        }, done);
     });
   }));
 
@@ -177,7 +187,7 @@ suite('favorites', addDatabaseHooks(() => {
         .expect(401, 'Unauthorized', done);
     });
 
-    test('GET /favorites/check?bookId=1', (done) => {
+    test('GET /favorites/1', (done) => {
       request(server)
         .get('/favorites/check?bookId=1')
         .set('Accept', 'application/json')
@@ -185,7 +195,7 @@ suite('favorites', addDatabaseHooks(() => {
         .expect(401, 'Unauthorized', done);
     });
 
-    test('GET /favorites/check?bookId=2', (done) => {
+    test('GET /favorites/2', (done) => {
       request(server)
         .get('/favorites/check?bookId=2')
         .set('Accept', 'application/json')
@@ -198,7 +208,7 @@ suite('favorites', addDatabaseHooks(() => {
         .post('/favorites')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
-        .send({ bookId: 2 })
+        .send({ userId: 1, podcastId: 2 })
         .expect('Content-Type', /text/)
         .expect(401, 'Unauthorized', done);
     });
@@ -208,7 +218,7 @@ suite('favorites', addDatabaseHooks(() => {
         .del('/favorites')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
-        .send({ bookId: 1 })
+        .send({ favoriteId: 1 })
         .expect('Content-Type', /text/)
         .expect(401, 'Unauthorized', done);
     });
