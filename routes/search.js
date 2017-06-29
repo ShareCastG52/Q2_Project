@@ -178,7 +178,7 @@ router.get('/', (req, res, next) => {
  *    }
  *
  * @apiErrorExample {json} Unauthorized user
- *    HTTP/1.1 400 "Unauthorized"
+ *    HTTP/1.1 401 "Unauthorized"
  *
  * @apiErrorExample {json}  List error
  *    HTTP/1.1 500 Internal Server Error
