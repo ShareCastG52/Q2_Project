@@ -14,7 +14,7 @@ suite('favorites', addDatabaseHooks(() => {
 
     beforeEach((done) => {
       request(server)
-        .post('/users')
+        .post('/login')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .send({
