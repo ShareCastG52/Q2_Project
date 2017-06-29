@@ -2,5 +2,5 @@
 .env
 node_modules
 notes
-.nyc_output
 apidoc
+.nyc_output
