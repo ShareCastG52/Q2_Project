@@ -12,7 +12,6 @@ const favoritesRepo = new FavoritesRepository();
 const router = express.Router();
 
 router.get('/', checkForToken, verifyUser, (req, res, next) => {
-  console.log("req cookie -->", req.cookies, 'req.body --->', req.body);
   let userId = getUserId(req);
   // console.log('userId', userId);
   if (!userId) {
