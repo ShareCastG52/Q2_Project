@@ -3,9 +3,16 @@ ShareCast, a social way to share podcasts between friends, stimulating conversat
 
 Changing lives, one podcast at a time.
 
+## Getting started
 
-
-## Creating a new user
-
-  In the body of the request a new user will need to supply:
-  {firstName, lastName, email, password}
+1. Fork and clone this repository
+2. ```npm install```
+3. Set up a .env file: ```JWT_KEY=xxxxx```
+4. ```createdb sharecast_dev```
+5. *optional* ```createdb sharecast_test```
+6. ```knex migrate:latest```
+7. ```knex seed:run```
+8. Review apiDoc documentation:
+    * Navigate to the root folder of ShareCast
+    * ```cd apidoc/```
+    * ```open index.html``` to open apiDoc in browser
