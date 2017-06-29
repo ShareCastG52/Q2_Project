@@ -11,8 +11,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
-app.disable('x-powered-by');
-
 switch (app.get('env')) {
   case 'development':
     app.use(morgan('dev'));
@@ -28,9 +26,9 @@ switch (app.get('env')) {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(helmet());
 
 const path = require('path');
-app.use(helmet());
 
 const favorites = require('./routes/favorites');
 // const shared = require('./routes/shared');
