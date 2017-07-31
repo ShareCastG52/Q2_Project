@@ -12,7 +12,4 @@ Changing lives, one podcast at a time.
 5. *optional* ```createdb sharecast_test```
 6. ```knex migrate:latest```
 7. ```knex seed:run```
-8. Review apiDoc documentation:
-    * Navigate to the root folder of ShareCast
-    * ```cd apidoc/```
-    * ```open index.html``` to open apiDoc in browser
+8. Review apiDoc documentation:http://sharecast-g52.surge.sh/

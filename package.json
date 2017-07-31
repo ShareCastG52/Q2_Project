@@ -11,9 +11,11 @@
     "test": "test"
   },
   "scripts": {
+    "heroku-postbuild": "knex migrate:latest",
     "knex": "knex",
     "test": "mocha",
-    "testnyc": "nyc mocha"
+    "testnyc": "nyc mocha",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

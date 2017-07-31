@@ -88,20 +88,6 @@ router.post('/' , verifyLoginDetails, (req, res, next) => {
 
       });
 
-
-// route.get('/', verifyLoginDetails, (req, res, next) => {
-//   // NOTE should GET requests even hit this route?
-//
-//   //if so then we'll just want to pass them either to their auth landing page or??
-// })
-
-    //this route is for new users only
-
-
-// function checkIfUserIsRegistered(req, res, next) {
-//
-// }
-
 function verifyLoginDetails(req, res, next) {
 
     let email = req.body.email;
@@ -122,7 +108,5 @@ function verifyLoginDetails(req, res, next) {
       res.status(400).send("Incorrect credentials");
     }
 };
-
-
 
 module.exports = router;

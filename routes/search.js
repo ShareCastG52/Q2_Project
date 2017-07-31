@@ -42,7 +42,7 @@ const ITUNES_PODCAST_LOOKUP_BASE_URL = "https://itunes.apple.com/lookup?id="
  * @apiSuccess {String}   searchResults.trackViewUrl      URL for podcast on iTunes.
  * @apiSuccessExample {json} Success-Response:
  *    HTTP/1.1 200 OK
- *    {
+ *    [{
         "artistName": "Maria Calanchini",
         "artworkUrl60": "http://is1.mzstatic.com/image/thumb/Music62/v4/9e/d5/9d/9ed59d33-a591-26cd-d740-e8f906a08a15/source/60x60bb.jpg",
         "artworkUrl600": "http://is1.mzstatic.com/image/thumb/Music62/v4/9e/d5/9d/9ed59d33-a591-26cd-d740-e8f906a08a15/source/600x600bb.jpg",
@@ -132,7 +132,7 @@ const ITUNES_PODCAST_LOOKUP_BASE_URL = "https://itunes.apple.com/lookup?id="
         ],
         "trackId": 733259146,
         "trackViewUrl": "https://itunes.apple.com/us/podcast/goop-directory-the-by-burgess-frank-gelett/id733259146?mt=2&uo=4"
-      }
+      }]
  *
  * @apiErrorExample {json}  List error
  *    HTTP/1.1 500 Internal Server Error

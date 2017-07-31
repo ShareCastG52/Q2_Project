@@ -39,7 +39,7 @@ const router = express.Router();
  * @apiSuccess {Number}   searchResults.podcastId         Podcast ID.
  * @apiSuccessExample {json} Success-Response:
  *    HTTP/1.1 200 OK
- *    {
+ *    [{
         id: 1,
         artistId: 1134742667,
         collectionId: 948976028,
@@ -81,7 +81,7 @@ const router = express.Router();
         userId: 1,
         userIdShared: 2,
         podcastId: 2
-      }
+      }]
  *
  * @apiErrorExample {json} Unauthorized user
  *    HTTP/1.1 401 "Unauthorized"
@@ -138,7 +138,7 @@ router.get('/', checkForToken, verifyUser, (req, res, next) => {
  * @apiSuccess {String[]} searchResults.genres            Genres for the podcast.
  * @apiSuccessExample {json} Success-Response:
  *    HTTP/1.1 200 OK
- *    {
+ *    [{
         id: 1,
         userId: 1,
         userIdShared: 2,
@@ -159,7 +159,7 @@ router.get('/', checkForToken, verifyUser, (req, res, next) => {
         artworkUrl600: 'http://is1.mzstatic.com/image/thumb/Music62/v4/ce/22/03/ce220318-10da-b927-16fb-ab5479045e1b/source/600x600bb.jpg',
         genreIds: [ '1305', '26', '1301', '1304' ],
         genres: [ 'Kids & Family', 'Podcasts', 'Arts', 'Education' ]
-      }
+      }]
  *
  * @apiErrorExample {json} Unauthorized user
  *    HTTP/1.1 401 "Unauthorized"
